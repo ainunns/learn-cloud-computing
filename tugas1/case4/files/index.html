@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Canary Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f5f5f5;
+        }
+        .box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+        #ver {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        #details {
+            color: #444;
+            white-space: pre-line;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 16px;
+            border: 0;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #007bff;
+            color: #fff;
+        }
+        button:hover {
+            background: #0056c7;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Canary Release / Traffic Splitting Demo</h2>
+
+    <div class="box">
+        <div id="ver">Loading...</div>
+        <div id="details"></div>
+        <button onclick="loadInfo()">Refresh</button>
+    </div>
+
+    <script>
+        async function loadInfo() {
+            try {
+                let res = await fetch("/info");
+                let data = await res.json();
+
+                document.getElementById("ver").innerText = 
+                    `Backend Version: ${data.version}`;
+
+                document.getElementById("details").innerText =
+                    `Hostname: ${data.hostname}\nTime: ${data.time}`;
+            } catch (err) {
+                document.getElementById("ver").innerText = "Error";
+                document.getElementById("details").innerText = err;
+            }
+        }
+
+        loadInfo();
+    </script>
+
+</body>
+</html>
