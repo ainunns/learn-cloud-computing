@@ -1,0 +1,8 @@
+.env
+
+# Python
+.venv
+venv
+
+# Redis
+redis_data
