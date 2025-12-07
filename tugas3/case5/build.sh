@@ -1,0 +1,1 @@
+docker build -t mygoserver:1.0 -f Dockerfile .
